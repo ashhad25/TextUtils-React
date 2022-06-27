@@ -35,25 +35,41 @@ export default function Navbar(props) {
               </Link>
             </li>
           </ul>
-          <div className={`form-check form-switch text-${props.mode==='light'?'dark':'light'}`}>
+          <div
+            className={`form-check form-switch text-${
+              props.mode === "light" ? "dark" : "light"
+            } me-2`}
+          >
             <input
               className="form-check-input"
               type="checkbox"
               id="flexSwitchCheckDefault"
               onClick={props.toggleMode}
             />
-            <label className="form-check-label" htmlFor="flexSwitchCheckDefault" id="mode">
+            <label
+              className="form-check-label"
+              htmlFor="flexSwitchCheckDefault"
+              id="mode"
+            >
               Enable Dark Mode
             </label>
           </div>
-          <div className={`form-check form-switch text-${props.mode==='light'?'dark':'light'} mx-2`}>
+          <div
+            className={`form-check form-switch text-${
+              props.mode === "light" ? "dark" : "light"
+            }`}
+          >
             <input
               className="form-check-input"
               type="checkbox"
               id="flexSwitchCheckDefault"
               onClick={props.toggleGreenMode}
             />
-            <label className="form-check-label" htmlFor="flexSwitchCheckDefault" id="mode2">
+            <label
+              className="form-check-label"
+              htmlFor="flexSwitchCheckDefault"
+              id="mode2"
+            >
               Enable Green Mode
             </label>
           </div>
@@ -63,4 +79,4 @@ export default function Navbar(props) {
   );
 }
 Navbar.propTypes = { title: PropTypes.string, aboutText: PropTypes.string };
-Navbar.defaultProps = { title: "TextUtils", aboutText: "About"};
+Navbar.defaultProps = { title: "TextUtils", aboutText: "About" };

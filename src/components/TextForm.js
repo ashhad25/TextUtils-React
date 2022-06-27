@@ -4,33 +4,33 @@ export default function TextForm(props) {
   const sort = () => {
     let rep = text.split(" ");
     let text1 = rep.sort();
-    let text2 = text1.join(' ');
+    let text2 = text1.join(" ");
     setText(text2.trimStart());
-    props.showAlert("Words Sorted!","success");
+    props.showAlert("Words Sorted!", "success");
   };
-  const removeExtraSpaces = ()=>{
+  const removeExtraSpaces = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
-    props.showAlert("Extra Spaces Removed!","success");
-  }
-  const copyText = () =>{
+    props.showAlert("Extra Spaces Removed!", "success");
+  };
+  const copyText = () => {
     navigator.clipboard.writeText(text);
-    props.showAlert("Copied to Clipboard!","success");
-  }
+    props.showAlert("Copied to Clipboard!", "success");
+  };
   const clearText = () => {
     let newText = "";
     setText(newText);
-    props.showAlert("Text Cleared!","success");
+    props.showAlert("Text Cleared!", "success");
   };
   const uppercase = () => {
     let newText = text.toUpperCase();
     setText(newText);
-    props.showAlert("Converted to uppercase!","success");
+    props.showAlert("Converted to uppercase!", "success");
   };
   const lowercase = () => {
     let newText = text.toLowerCase();
     setText(newText);
-    props.showAlert("Converted to lowercase!","success");
+    props.showAlert("Converted to lowercase!", "success");
   };
   const handleOnChange = (event) => {
     setText(event.target.value);
@@ -49,36 +49,67 @@ export default function TextForm(props) {
             rows="8"
           ></textarea>
         </div>
-            <button className="btn btn-dark" onClick={uppercase}>
-              Convert to Uppercase
-            </button>
-            <button className="btn btn-dark mx-2" onClick={lowercase}>
-              Convert to Lowercase
-            </button>
-            <button className="btn btn-dark" onClick={sort}>
-              Sort Words
-            </button>
-            <button className="btn btn-dark mx-2" onClick={clearText}>
-              Clear Output
-            </button>
-            <button className="btn btn-dark" onClick={copyText}>
-              Copy Text
-            </button>
-            <button className="btn btn-dark mx-2" onClick={removeExtraSpaces}>
-              Remove Extra Spaces
-            </button>
+        <div className="container">
+          <div className="btn-group" role="group">
+            <div className="row">
+              <button
+                className="btn btn-dark btn-block my-1"
+                onClick={uppercase}
+              >
+                Convert to Uppercase
+              </button>
+              <button
+                className="btn btn-dark btn-block my-1"
+                onClick={lowercase}
+              >
+                Convert to Lowercase
+              </button>
+              <button className="btn btn-dark btn-block my-1" onClick={sort}>
+                Sort Words
+              </button>
+              <button
+                className="btn btn-dark btn-block my-1"
+                onClick={clearText}
+              >
+                Clear Output
+              </button>
+              <button
+                className="btn btn-dark btn-block my-1"
+                onClick={copyText}
+              >
+                Copy Text
+              </button>
+              <button
+                className="btn btn-dark btn-block my-1"
+                onClick={removeExtraSpaces}
+              >
+                Remove Extra Spaces
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="container my-3">
         <h2>Your text summary</h2>
         <p>
-          No of words: <b>{text.length>0?text.trimEnd().split(" ").length:'0'} words</b>
+          No of words:{" "}
+          <b>
+            {text.length > 0 ? text.trimEnd().split(" ").length : "0"} words
+          </b>
           <br />
           No of characters: <b>{text.length} characters</b>
           <br />
-          Reading time: <b>{text.length>0 ? 0.008 * text.split(" ").length:'0'} minutes</b>
+          Reading time:{" "}
+          <b>
+            {text.length > 0 ? 0.008 * text.split(" ").length : "0"} minutes
+          </b>
         </p>
         <h2>Preview</h2>
-        <p>{text.length>0?text:"Enter some text in the textbox above to analyze"}</p>
+        <p>
+          {text.length > 0
+            ? text
+            : "Enter some text in the textbox above to analyze"}
+        </p>
       </div>
     </>
   );
