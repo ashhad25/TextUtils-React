@@ -75,7 +75,7 @@ export default function TextForm(props) {
           <br />
           No of characters: <b>{text.length} characters</b>
           <br />
-          Reading time: <b>{0.008 * text.split(" ").length} minutes</b>
+          Reading time: <b>{text.length>0 ? 0.008 * text.split(" ").length:'0'} minutes</b>
         </p>
         <h2>Preview</h2>
         <p>{text.length>0?text:"Enter some text in the textbox above to analyze"}</p>
