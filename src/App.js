@@ -1,10 +1,8 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
-import About from "./components/About";
 import { useState } from "react";
 import Alert from "./components/Alert";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -19,97 +17,112 @@ function App() {
       setAlert(null);
     }, 1500);
   };
-  const toggleMode = () => {
-    if (mode === "light") {
-      setMode("dark");
-      document.body.style.backgroundColor = "#042743";
-      showAlert("Dark mode has been enabled", "success");
-      document.body.style.color = "white";
-      document.getElementById("mode").innerHTML = "Disable Dark Mode";
-      document.getElementById("myBox").style.backgroundColor = "#042743";
-      document.getElementById("myBox").style.color = "white";
-      let elems = document.querySelectorAll(".btn");
-      let index = 0,
-        length = elems.length;
+
+  const removeBodyClasses = () => {
+    document.body.classList.remove('bg-light');
+    document.body.classList.remove('bg-dark');
+    document.body.classList.remove('bg-primary');
+    document.body.classList.remove('bg-success');
+    document.body.classList.remove('bg-danger');
+    document.body.classList.remove('bg-warning');
+    document.body.classList.remove('text-dark');
+    document.body.classList.remove('text-white');
+    document.getElementById('myBox').classList.remove('bg-light');
+    document.getElementById('myBox').classList.remove('bg-primary');
+    document.getElementById('myBox').classList.remove('bg-success');
+    document.getElementById('myBox').classList.remove('bg-dark');
+    document.getElementById('myBox').classList.remove('bg-danger');
+    document.getElementById('myBox').classList.remove('bg-warning');
+    document.getElementById('myBox').classList.remove('text-dark');
+    document.getElementById('myBox').classList.remove('text-white');
+    let elems = document.querySelectorAll(".btn");
+    let index = 0,
+    length = elems.length;
       for (; index < length; index++) {
-        elems[index].style.backgroundColor = "#0d6efd";
-        elems[index].style.color = "white";
+        elems[index].classList.remove('bg-light');
+        elems[index].classList.remove('bg-dark');
+        elems[index].classList.remove('bg-primary');
+        elems[index].classList.remove('bg-success');
+        elems[index].classList.remove('bg-danger');
+        elems[index].classList.remove('bg-warning');
+        elems[index].classList.remove('text-dark');
+        elems[index].classList.remove('border-dark');
       }
-    } else {
-      setMode("light");
-      document.body.style.backgroundColor = "white";
-      showAlert("Dark mode has been Disabled", "success");
-      document.body.style.color = "black";
-      document.getElementById("mode").innerHTML = "Enable Dark Mode";
-      document.getElementById("myBox").style.backgroundColor = "white";
-      document.getElementById("myBox").style.color = "black";
-      let elems = document.querySelectorAll(".btn");
-      let index = 0,
-        length = elems.length;
-      for (; index < length; index++) {
-        elems[index].style.backgroundColor = "#212529";
-        elems[index].style.color = "white";
-      }
+  }
+  const toggleMode = (cls) => {
+    removeBodyClasses();
+    if (cls === 'light') {
+      document.getElementById('myBox').classList.add('text-dark');
     }
-  };
-  const toggleGreenMode = () => {
+    else{
+      if (cls === 'warning') {
+        document.body.classList.add('bg-'+cls);
+        document.body.classList.add('text-dark');
+        document.getElementById('myBox').classList.add('bg-'+cls);
+        document.getElementById('myBox').classList.add('text-dark');
+      }
+      else{
+        document.getElementById('myBox').classList.add('bg-'+cls);
+        document.body.classList.add('bg-'+cls);
+        document.body.classList.add('text-white');
+      document.getElementById('myBox').classList.add('text-white');
+     }
+    }
     if (mode === "light") {
       setMode("dark");
-      document.body.style.backgroundColor = "green";
-      showAlert("Green mode has been enabled", "success");
-      document.body.style.color = "white";
-      document.getElementById("mode2").innerHTML = "Disable Green Mode";
-      document.getElementById("myBox").style.backgroundColor = "green";
-      document.getElementById("myBox").style.color = "white";
+      showAlert(`${cls} mode is Enabled`,"success");
       let elems = document.querySelectorAll(".btn");
       let index = 0,
-        length = elems.length;
+      length = elems.length;
       for (; index < length; index++) {
-        elems[index].style.backgroundColor = "#198754";
-        elems[index].style.color = "white";
+        if (cls === 'light') {
+          elems[index].classList.add('bg-dark');
+        }else{
+          if (cls === 'warning') {
+            elems[index].classList.add('bg-'+cls);
+            elems[index].classList.add('text-dark');
+            elems[index].classList.add('border-dark');
+          }
+          else{
+            elems[index].classList.add('bg-'+cls);
+          }
+        }
       }
     } else {
       setMode("light");
-      document.body.style.backgroundColor = "white";
-      showAlert("Green mode has been disabled", "success");
-      document.body.style.color = "black";
-      document.getElementById("mode2").innerHTML = "Enable Green Mode";
-      document.getElementById("myBox").style.backgroundColor = "white";
-      document.getElementById("myBox").style.color = "black";
+      showAlert(`${cls} mode is Enabled`,"success");
       let elems = document.querySelectorAll(".btn");
       let index = 0,
-        length = elems.length;
+      length = elems.length;
       for (; index < length; index++) {
-        elems[index].style.backgroundColor = "#212529";
-        elems[index].style.color = "white";
+        if (cls === 'light') {
+          elems[index].classList.add('bg-dark');
+        }else{
+          if (cls === 'warning') {
+            elems[index].classList.add('bg-'+cls);
+            elems[index].classList.add('text-dark');
+            elems[index].classList.add('border-dark');
+          }
+          else{
+            elems[index].classList.add('bg-'+cls);
+          }
+        }
       }
     }
   };
   return (
     <>
-      <BrowserRouter>
         <Navbar
           title="TextUtils"
           mode={mode}
-          toggleMode={toggleMode}
-          toggleGreenMode={toggleGreenMode}
+          toggleMode={toggleMode} 
         />
         <Alert alert={alert} />
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <TextForm
-                heading="Try TextUtils- Word Counter, Character Counter, Remove Extra Spaces"
-                mode={mode}
-                showAlert={showAlert}
-              />
-            }
+          <TextForm
+            heading="Try TextUtils- Word Counter, Character Counter, Remove Extra Spaces"
+            mode={mode}
+            showAlert={showAlert}
           />
-          <Route exact path="/about" element={<About mode={mode} />} />
-        </Routes>
-      </BrowserRouter>
     </>
   );
 }

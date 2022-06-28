@@ -36,7 +36,7 @@ export default function TextForm(props) {
         <h1 className="mb-4">{props.heading}</h1>
         <div className="mb-3">
           <textarea
-            className="form-control"
+            className="form-control text-dark"
             value={text}
             onChange={handleOnChange}
             id="myBox"
@@ -45,35 +45,35 @@ export default function TextForm(props) {
         </div>
          <button
                 disabled ={text.length === 0}
-                className="btn btn-dark my-1 mx-1"
+                className="btn btn-dark my-1 mx-1 border-light fs-5 fw-bold"
                 onClick={uppercase}
               >
                Convert to Uppercase
               </button>
               <button
                 disabled ={text.length === 0}
-                className="btn btn-dark my-1 mx-1"
+                className="btn btn-dark my-1 mx-1 border-light fs-5 fw-bold"
                 onClick={lowercase}
               >
                 Convert to Lowercase
               </button>
               <button
                 disabled ={text.length === 0}
-                className="btn btn-dark my-1 mx-1"
+                className="btn btn-dark my-1 mx-1 border-light fs-5 fw-bold"
                 onClick={clearText}
               >
                 Clear Text
               </button>
               <button
                 disabled ={text.length === 0}
-                className="btn btn-dark my-1 mx-1"
+                className="btn btn-dark my-1 mx-1 border-light fs-5 fw-bold"
                 onClick={copyText}
               >
                 Copy Text
               </button>
               <button
                 disabled ={text.length === 0}
-                className="btn btn-dark my-1 mx-1"
+                className="btn btn-dark my-1 mx-1 border-light fs-5 fw-bold"
                 onClick={removeExtraSpaces}
               >
                 Remove Extra Spaces
@@ -84,7 +84,7 @@ export default function TextForm(props) {
         <p>
           No of words:{" "}
           <b>
-            {text.length > 0 ? text.trimEnd().split(" ").length : "0"} words
+            {text.length > 0 ? text.trimEnd().split(/\s+/).length : "0"} words
           </b>
           <br />
           No of characters: <b>{text.length} characters</b>
