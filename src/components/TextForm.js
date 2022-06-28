@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 
 export default function TextForm(props) {
-  const sort = () => {
-    let rep = text.split(" ");
-    let text1 = rep.sort();
-    let text2 = text1.join(" ");
-    setText(text2.trimStart());
-    props.showAlert("Words Sorted!", "success");
-  };
   const removeExtraSpaces = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
@@ -15,6 +8,7 @@ export default function TextForm(props) {
   };
   const copyText = () => {
     navigator.clipboard.writeText(text);
+    document.getSelection().removeAllRanges();
     props.showAlert("Copied to Clipboard!", "success");
   };
   const clearText = () => {
@@ -39,7 +33,7 @@ export default function TextForm(props) {
   return (
     <>
       <div className="container">
-        <h1>{props.heading}</h1>
+        <h1 className="mb-4">{props.heading}</h1>
         <div className="mb-3">
           <textarea
             className="form-control"
@@ -49,46 +43,42 @@ export default function TextForm(props) {
             rows="8"
           ></textarea>
         </div>
-        <div className="container">
-          <div className="btn-group" role="group">
-            <div className="row">
-              <button
-                className="btn btn-dark btn-block my-1"
+         <button
+                disabled ={text.length === 0}
+                className="btn btn-dark my-1 mx-1"
                 onClick={uppercase}
               >
-                Convert to Uppercase
+               Convert to Uppercase
               </button>
               <button
-                className="btn btn-dark btn-block my-1"
+                disabled ={text.length === 0}
+                className="btn btn-dark my-1 mx-1"
                 onClick={lowercase}
               >
                 Convert to Lowercase
               </button>
-              <button className="btn btn-dark btn-block my-1" onClick={sort}>
-                Sort Words
-              </button>
               <button
-                className="btn btn-dark btn-block my-1"
+                disabled ={text.length === 0}
+                className="btn btn-dark my-1 mx-1"
                 onClick={clearText}
               >
-                Clear Output
+                Clear Text
               </button>
               <button
-                className="btn btn-dark btn-block my-1"
+                disabled ={text.length === 0}
+                className="btn btn-dark my-1 mx-1"
                 onClick={copyText}
               >
                 Copy Text
               </button>
               <button
-                className="btn btn-dark btn-block my-1"
+                disabled ={text.length === 0}
+                className="btn btn-dark my-1 mx-1"
                 onClick={removeExtraSpaces}
               >
                 Remove Extra Spaces
               </button>
-            </div>
           </div>
-        </div>
-      </div>
       <div className="container my-3">
         <h2>Your text summary</h2>
         <p>
@@ -108,7 +98,7 @@ export default function TextForm(props) {
         <p>
           {text.length > 0
             ? text
-            : "Enter some text in the textbox above to analyze"}
+            : "Nothing to preview!"}
         </p>
       </div>
     </>
